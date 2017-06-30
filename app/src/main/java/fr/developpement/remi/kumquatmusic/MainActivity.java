@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<LigneMusic> genererLigneMusic(){
         ArrayList<LigneMusic> MesLignesMusics = new ArrayList<LigneMusic>();
         for (int i = 0; i < maMusique.MesMusics.size(); i++){
-            MesLignesMusics.add(new LigneMusic(Color.BLACK, maMusique.MesMusics.get(i)));
+            MesLignesMusics.add(new LigneMusic(maMusique.MesMusics.get(i).uneImg,maMusique.MesMusics.get(i).leTitre,maMusique.MesMusics.get(i).laDuree));
         }
 
         return MesLignesMusics;

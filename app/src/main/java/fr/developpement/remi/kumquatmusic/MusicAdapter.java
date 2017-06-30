@@ -4,6 +4,7 @@ package fr.developpement.remi.kumquatmusic;
  * Created by REMI on 30/06/2017.
  */
 
+import android.graphics.drawable.InsetDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,21 +23,27 @@ import java.util.ArrayList;
 
 
 class LigneMusic {
-    private int color;
+    private int img;
     private String text;
+    private String duree;
 
-    public LigneMusic(int color, String text) {
-        this.color = color;
+    public LigneMusic(int color, String text, String duree) {
+        this.img = color;
         this.text = text;
+        this.duree = duree;
     }
 
     public String getText()
     {
         return this.text;
     }
-    public int getColor()
+    public int getImg()
     {
-        return this.color;
+        return this.img;
+    }
+    public String getDuree()
+    {
+        return this.duree;
     }
 
 }
@@ -60,6 +67,7 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
             viewHolder = new MusicViewHolder();
             viewHolder.titre = (TextView) convertView.findViewById(R.id.text);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
+            viewHolder.duree = (TextView) convertView.findViewById(R.id.duree);
             convertView.setTag(viewHolder);
         }
 
@@ -68,7 +76,8 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
 
         //il ne reste plus qu'à remplir notre vue
         viewHolder.titre.setText(ligneMusic.getText());
-        viewHolder.avatar.setImageDrawable(new ColorDrawable(ligneMusic.getColor()));
+        viewHolder.duree.setText(ligneMusic.getDuree());
+        viewHolder.avatar.setImageResource(ligneMusic.getImg());
 
         return convertView;
     }
@@ -76,5 +85,6 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
     private class MusicViewHolder{
         public TextView titre;
         public ImageView avatar;
+        public TextView duree;
     }
 }
