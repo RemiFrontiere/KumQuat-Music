@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
         this.maMusique = new Music();
         this.maListe = (ListView)findViewById(R.id.maListe);
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
-        final ArrayAdapter<LigneMusic> adapter = new ArrayAdapter<LigneMusic>(MainActivity.this,android.R.layout.simple_list_item_1,LignesMusics);
+        MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
         maListe.setAdapter(adapter);
         
     }
     
     private ArrayList<LigneMusic> genererLigneMusic(){
         ArrayList<LigneMusic> MesLignesMusics = new ArrayList<LigneMusic>();
-        for (int i = 0; i <= maMusique.MesMusics.size(); i++){
+        for (int i = 0; i < maMusique.MesMusics.size(); i++){
             MesLignesMusics.add(new LigneMusic(Color.BLACK, maMusique.MesMusics.get(i)));
         }
 
