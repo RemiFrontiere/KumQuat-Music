@@ -1,22 +1,17 @@
 package fr.developpement.remi.kumquatmusic;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.media.MediaPlayer;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private Music maMusique;
-    private TextView montexte;
-    private Button monBouton;
-    private Integer num = 0;
-    private Button Boutonstop;
-
-
-    private MediaPlayer monMP;
+    private ListView maListe;
 
 
     @Override
@@ -25,45 +20,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.maMusique = new Music();
-        this.monBouton = (Button)findViewById(R.id.button2);
-        this.montexte = (TextView)findViewById(R.id.textView6);
-        this.Boutonstop = (Button)findViewById(R.id.button3);
-
-        this.monBouton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (num <= 9)
-                {
-                    montexte.setText(maMusique.MesMusics.get(num));
-                    String ui = montexte.getText().toString();
-                    maMusique.Lire(MainActivity.this,ui);
-                    num++;
-                }
-                else
-                {
-                    num = 0;
-                    montexte.setText(maMusique.MesMusics.get(num));
-                }
-
-            }
-        });
-
-        this.Boutonstop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(maMusique.monPlayer.isPlaying())
-                   maMusique.Stop();
-            }
-        });
-
+        this.maListe = (ListView)findViewById(R.id.maListe);
+        ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
+        MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
+        maListe.setAdapter(adapter);
+        
     }
+    
+    private ArrayList<LigneMusic> genererLigneMusic(){
+        ArrayList<LigneMusic> MesLignesMusics = new ArrayList<LigneMusic>();
+        for (int i = 0; i < maMusique.MesMusics.size(); i++){
+            MesLignesMusics.add(new LigneMusic(maMusique.MesMusics.get(i).uneImg,maMusique.MesMusics.get(i).leTitre,maMusique.MesMusics.get(i).laDuree));
+        }
 
+        return MesLignesMusics;
+    }
     public void onDestroy() {
-
-        if(monMP.isPlaying())
-            monMP.stop();
         super.onDestroy();
 
     }
 }
+
