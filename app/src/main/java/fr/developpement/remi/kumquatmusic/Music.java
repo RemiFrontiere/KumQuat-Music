@@ -36,34 +36,34 @@ public class Music {
 
         int MP3 = 0;
         switch (nom){
-            case "Côld vibe [TRAP]":
+            case "Côld vibe":
                 MP3 = R.raw.coldvibe;
                 break;
-            case "Energized [ELECTRO]":
+            case "Energized":
                 MP3 = R.raw.energized;
                 break;
-            case "Wind&Storms [PROGRESSIVE HOUSE]":
+            case "Wind&Storms":
                 MP3 = R.raw.windstorms;
                 break;
-            case "Wishes [DEEP HOUSE]":
+            case "Wishes":
                 MP3 = R.raw.wishes;
                 break;
-            case "SJFL [FUNK]":
+            case "SJFL":
                 MP3 = R.raw.shfl;
                 break;
-            case "Just in Time [BASSHOUSE]":
+            case "Just in Time":
                 MP3 = R.raw.justintime;
                 break;
-            case "Too Late [TRAP]":
+            case "Too Late":
                 MP3 = R.raw.toolate;
                 break;
-            case "Little spoon [MELBOURNE BOUNCE]":
+            case "Little spoon":
                 MP3 = R.raw.littlespoon;
                 break;
-            case "The last thing I felt [DRUM N BASS]":
+            case "The last thing I felt":
                 MP3 = R.raw.thelastthingifelt;
                 break;
-            case "Kinda Loud [BASSHOUSE]":
+            case "Kinda Loud":
                 MP3 = R.raw.kindaloud;
                 break;
         }

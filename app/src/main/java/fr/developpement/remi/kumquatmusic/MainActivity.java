@@ -3,6 +3,8 @@ package fr.developpement.remi.kumquatmusic;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,9 +24,24 @@ public class MainActivity extends AppCompatActivity {
         this.maMusique = new Music();
         this.maListe = (ListView)findViewById(R.id.maListe);
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
-        MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
+        final MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
         maListe.setAdapter(adapter);
-        
+
+        maListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (maMusique.monPlayer.isPlaying())
+                {
+                    maMusique.monPlayer.stop();
+                }
+                Object o = maListe.getItemAtPosition(position);
+                LigneMusic UneLigne = (LigneMusic)o;
+                maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+            }
+        });
+
     }
     
     private ArrayList<LigneMusic> genererLigneMusic(){
