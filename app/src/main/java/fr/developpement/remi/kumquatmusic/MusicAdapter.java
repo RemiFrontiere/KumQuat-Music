@@ -4,9 +4,12 @@ package fr.developpement.remi.kumquatmusic;
  * Created by REMI on 30/06/2017.
  */
 
+import android.graphics.Color;
 import android.graphics.drawable.InsetDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +29,8 @@ class LigneMusic {
     private int img;
     private String text;
     private String duree;
+    public int couleur;
+
 
     public LigneMusic(int color, String text, String duree) {
         this.img = color;
@@ -50,6 +55,9 @@ class LigneMusic {
 
 public class MusicAdapter extends ArrayAdapter<LigneMusic> {
 
+    public int couleur = Color.WHITE;
+    public String titreLigne;
+
     //tweets est la liste des models à afficher
     public MusicAdapter(Context context, ArrayList<LigneMusic> lignesmusics) {
         super(context, 0, lignesmusics);
@@ -68,6 +76,18 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
             viewHolder.titre = (TextView) convertView.findViewById(R.id.text);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             viewHolder.duree = (TextView) convertView.findViewById(R.id.duree);
+
+        /*    new AlertDialog.Builder(getContext())
+                    .setTitle("OK")
+                    .setMessage(viewHolder.titre.getText())
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).setNegativeButton("No", null).show();*/
+
+
             convertView.setTag(viewHolder);
         }
 
@@ -78,6 +98,14 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
         viewHolder.titre.setText(ligneMusic.getText());
         viewHolder.duree.setText(ligneMusic.getDuree());
         viewHolder.avatar.setImageResource(ligneMusic.getImg());
+        viewHolder.titre.setTextColor(Color.WHITE);
+        viewHolder.duree.setTextColor(Color.WHITE);
+        if (titreLigne!= null && viewHolder.titre.getText() == titreLigne)
+        {
+            viewHolder.titre.setTextColor(couleur);
+            viewHolder.duree.setTextColor(couleur);
+        }
+
 
         return convertView;
     }
@@ -86,5 +114,6 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
         public TextView titre;
         public ImageView avatar;
         public TextView duree;
+        public int maCouleur;
     }
 }

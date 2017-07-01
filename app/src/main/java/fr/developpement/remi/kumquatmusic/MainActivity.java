@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -32,13 +33,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
                 if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
                 {
                     maMusique.monPlayer.stop();
                 }
 
+                // #2196F3
                 Object o = maListe.getItemAtPosition(position);
                 LigneMusic UneLigne = (LigneMusic)o;
+                adapter.couleur = Color.parseColor("#42A5F5");
+                adapter.titreLigne = ((LigneMusic) o).getText();
+                maListe.setAdapter(adapter);
+
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
             }
@@ -55,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         return MesLignesMusics;
     }
     public void onDestroy() {
+
+        if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
+        {
+            maMusique.monPlayer.stop();
+        }
         super.onDestroy();
 
     }
