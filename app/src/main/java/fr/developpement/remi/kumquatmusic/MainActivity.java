@@ -1,6 +1,7 @@
 package fr.developpement.remi.kumquatmusic;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (maMusique.monPlayer.isPlaying())
+                if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
                 {
                     maMusique.monPlayer.stop();
                 }
+
                 Object o = maListe.getItemAtPosition(position);
                 LigneMusic UneLigne = (LigneMusic)o;
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
