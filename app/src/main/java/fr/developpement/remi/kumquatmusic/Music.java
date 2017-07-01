@@ -1,6 +1,8 @@
 package fr.developpement.remi.kumquatmusic;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.Enumeration;
 
@@ -16,20 +18,35 @@ public class Music {
 
     public ArrayList<UneMusique> MesMusics;
     public MediaPlayer monPlayer;
+    public ArrayList<String> TitresMusics;
 
     public Music(){
-        this.MesMusics = new ArrayList<UneMusique>();
+        this.MesMusics = new ArrayList<>();
+        this.TitresMusics = new ArrayList<>();
+        this.TitresMusics.add("Côld vibe");
+        this.TitresMusics.add("Energized");
+        this.TitresMusics.add("Kinda Loud");
+        this.TitresMusics.add("The last thing I felt");
+        this.TitresMusics.add("Little spoon");
+        this.TitresMusics.add("Just in Time");
+        this.TitresMusics.add("SJFL");
+        this.TitresMusics.add("Wishes");
+        this.TitresMusics.add("Wind&Storms");
+        this.TitresMusics.add("Too Late");
 
-        this.MesMusics.add(new UneMusique("Côld vibe", "2.58",R.mipmap.coldpicture));
-        this.MesMusics.add(new UneMusique("Energized", "3.08",R.mipmap.energipicture));
-        this.MesMusics.add(new UneMusique("Kinda Loud", "3.35",R.mipmap.kindapicture));
-        this.MesMusics.add(new UneMusique("The last thing I felt", "3.20",R.mipmap.lastpicture));
-        this.MesMusics.add(new UneMusique("Little spoon", "3.13",R.mipmap.littlepicture));
-        this.MesMusics.add(new UneMusique("Too Late", "3.17",R.mipmap.toolatepicture));
-        this.MesMusics.add(new UneMusique("Just in Time", "3.18",R.mipmap.justpicture));
-        this.MesMusics.add(new UneMusique("SJFL", "2.32",R.mipmap.sjflpicture));
-        this.MesMusics.add(new UneMusique("Wishes", "3.05",R.mipmap.wishespicture));
-        this.MesMusics.add(new UneMusique("Wind&Storms", "3.45",R.mipmap.windpicture));
+        Collections.sort(TitresMusics);
+
+        this.MesMusics.add(new UneMusique(TitresMusics.get(0), "2.58",R.mipmap.coldpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(1), "3.08",R.mipmap.energipicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.35",R.mipmap.kindapicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.20",R.mipmap.lastpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(4), "3.13",R.mipmap.littlepicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "3.17",R.mipmap.toolatepicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "3.18",R.mipmap.justpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "2.32",R.mipmap.sjflpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.05",R.mipmap.wishespicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.45",R.mipmap.windpicture));
+
     }
 
     public void Lire(Context context, String nom){
