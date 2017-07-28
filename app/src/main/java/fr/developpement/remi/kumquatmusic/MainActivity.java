@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton suivant;
     private ImageButton pause;
     private View bas;
+    private NotificationManager notif;
 
 
     @Override
@@ -55,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         final MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
         maListe.setAdapter(adapter);
 
+        maListe.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
         maListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -172,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private final void createNotification(String text, int img){
-        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notif = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         final Intent launchNotifiactionIntent = new Intent(this, MainActivity.class);
         final PendingIntent pendingIntent = PendingIntent.getActivity(this,REQUEST_CODE, launchNotifiactionIntent,
@@ -185,12 +193,13 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle(text)
                 .setContentText(null)
                 .setContentIntent(pendingIntent)
-                .addAction(R.mipmap.previous, null,
-                        PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
-                .addAction(R.mipmap.pause, null,
-                        PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
-                .addAction(R.mipmap.next, null,
-                        PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+                .setAutoCancel(true)
+               // .addAction(R.mipmap.previous, null,
+               //         PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+             //   .addAction(R.mipmap.pause, null,
+              //          PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+              //  .addAction(R.mipmap.next, null,
+              //          PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
                 ;
 
         Notification notification = new Notification.BigPictureStyle(builder)
@@ -199,9 +208,9 @@ public class MainActivity extends AppCompatActivity {
 
         notification.color = this.getResources()
                 .getColor(R.color.background);
-        notification.flags = Notification.FLAG_ONGOING_EVENT;
-
-        mNotification.notify(NOTIFICATION_ID, notification);
+       // notification.flags = Notification.FLAG_ONGOING_EVENT;
+        notification.priority = Notification.PRIORITY_MAX;
+        notif.notify(NOTIFICATION_ID, notification);
     }
 
     private ArrayList<LigneMusic> genererLigneMusic(){
@@ -221,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
         {
             maMusique.monPlayer.stop();
         }
+        notif.cancelAll();
         super.onDestroy();
 
     }
