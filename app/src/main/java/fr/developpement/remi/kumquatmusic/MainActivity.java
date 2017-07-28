@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton precedent;
     private ImageButton suivant;
     private ImageButton pause;
-    private ImageButton stop;
+    private View bas;
 
 
     @Override
@@ -32,8 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.precedent = (ImageButton)findViewById(R.id.btPrecedent) ;
         this.suivant = (ImageButton)findViewById(R.id.btSuivant) ;
-        this.stop = (ImageButton)findViewById(R.id.btStop) ;
         this.pause = (ImageButton)findViewById(R.id.btPause) ;
+        this.bas = findViewById(R.id.LayoutBas);
+        this.bas.setVisibility(View.INVISIBLE);
+        this.precedent.setTag(R.mipmap.previous);
+        this.suivant.setTag(R.mipmap.next);
         this.pause.setTag(R.mipmap.pause);
 
 
@@ -44,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
         maListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                bas.setVisibility(View.VISIBLE);
+                pause.setImageResource(R.mipmap.pause);
+                pause.setTag(R.mipmap.pause);
                 if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
                 {
                     maMusique.monPlayer.stop();
@@ -83,23 +89,63 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(maMusique.monPlayer.isPlaying())
-                    maMusique.monPlayer.stop();
-            }
-        });
 
         precedent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                pause.setImageResource(R.mipmap.pause);
+                pause.setTag(R.mipmap.pause);
+
+                if (maMusique.monPlayer.isPlaying())
+                    maMusique.monPlayer.stop();
+
+                int index = 0;
+                for(int i = 0; i < maMusique.MesMusics.size(); i++)
+                {
+                    if(maMusique.MesMusics.get(i).leTitre == adapter.titreLigne) {
+                        index = i - 1;
+                        if(index < 0)
+                            index = maMusique.MesMusics.size() - 1;
+                        break;
+                    }
+                }
+
+                LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
+                adapter.couleur = Color.parseColor("#42A5F5");
+                adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                maListe.setAdapter(adapter);
+
+                maMusique.Lire(MainActivity.this,UneLigne.getText());
             }
         });
 
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pause.setImageResource(R.mipmap.pause);
+                pause.setTag(R.mipmap.pause);
+
+                if (maMusique.monPlayer.isPlaying())
+                    maMusique.monPlayer.stop();
+
+                int index = 0;
+                for(int i = 0; i < maMusique.MesMusics.size(); i++)
+                {
+                    if(maMusique.MesMusics.get(i).leTitre == adapter.titreLigne) {
+                        index = i + 1;
+                        if(index > maMusique.MesMusics.size() - 1)
+                            index = 0;
+                        break;
+                    }
+                }
+
+                LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
+                adapter.couleur = Color.parseColor("#42A5F5");
+                adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                maListe.setAdapter(adapter);
+
+                maMusique.Lire(MainActivity.this,UneLigne.getText());
             }
         });
 
