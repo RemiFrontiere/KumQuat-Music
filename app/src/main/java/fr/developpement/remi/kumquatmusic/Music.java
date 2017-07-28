@@ -33,19 +33,21 @@ public class Music {
         this.TitresMusics.add("Wishes");
         this.TitresMusics.add("Wind&Storms");
         this.TitresMusics.add("Too Late");
+        this.TitresMusics.add("Dreaming Star");
 
         Collections.sort(TitresMusics);
 
         this.MesMusics.add(new UneMusique(TitresMusics.get(0), "2.59",R.mipmap.coldpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(1), "3.08",R.mipmap.energipicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.18",R.mipmap.justpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.35",R.mipmap.kindapicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(4), "3.13",R.mipmap.littlepicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "2.32",R.mipmap.sjflpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "3.20",R.mipmap.lastpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "3.17",R.mipmap.toolatepicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.45",R.mipmap.windpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.05",R.mipmap.wishespicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(1), "2.34",R.mipmap.dreamstar));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.08",R.mipmap.energipicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.18",R.mipmap.justpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(4), "3.35",R.mipmap.kindapicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "3.13",R.mipmap.littlepicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "2.32",R.mipmap.sjflpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "3.20",R.mipmap.lastpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.17",R.mipmap.toolatepicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.45",R.mipmap.windpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(10), "3.05",R.mipmap.wishespicture));
 
 
     }
@@ -83,6 +85,9 @@ public class Music {
                 break;
             case "Kinda Loud":
                 MP3 = R.raw.kindaloud;
+                break;
+            case "Dreaming Star":
+                MP3 = R.raw.dreamingstar;
                 break;
         }
         monPlayer = MediaPlayer.create(context,MP3);

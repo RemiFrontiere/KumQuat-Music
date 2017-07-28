@@ -4,9 +4,13 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton suivant;
     private ImageButton pause;
     private View bas;
+    private NotificationManager notif;
+    private ImageButton youtube;
     private static MusicAdapter adapter;
 
     @Override
@@ -38,20 +44,29 @@ public class MainActivity extends AppCompatActivity {
         this.pause = (ImageButton)findViewById(R.id.btPause) ;
         this.bas = findViewById(R.id.LayoutBas);
         this.bas.setVisibility(View.INVISIBLE);
+
         this.precedent.setTag(R.mipmap.previous);
         this.suivant.setTag(R.mipmap.next);
         this.pause.setTag(R.mipmap.pause);
+        this.youtube = (ImageButton)findViewById((R.id.btYoutube));
 
 
-        createNotification();
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
         setAdapter(new MusicAdapter(MainActivity.this,LignesMusics));
         maListe.setAdapter(getAdapter());
 
+        maListe.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
         maListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 bas.setVisibility(View.VISIBLE);
+                maListe.setPadding(0,0,0,150
+                );
                 pause.setImageResource(R.mipmap.pause);
                 pause.setTag(R.mipmap.pause);
                 if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
@@ -62,12 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 // #2196F3
                 Object o = maListe.getItemAtPosition(position);
                 LigneMusic UneLigne = (LigneMusic)o;
-                getAdapter().couleur = Color.parseColor("#42A5F5");
-                getAdapter().titreLigne = ((LigneMusic) o).getText();
-                getAdapter().img = ((LigneMusic) o).getImg();
-                maListe.setAdapter(getAdapter());
+                adapter.couleur = Color.parseColor("#42A5F5");
+                adapter.titreLigne = ((LigneMusic) o).getText();
+                adapter.img = ((LigneMusic) o).getImg();
+                maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+                createNotification(adapter.titreLigne,adapter.img);
 
             }
         });
@@ -93,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent webOpen = new Intent(android.content.Intent.ACTION_VIEW);
+                webOpen.setData(Uri.parse("https://www.youtube.com/channel/UCMFaOzZvLl-fMfU0FET7tmw"));
+                startActivity(webOpen);
+            }
+        });
 
         precedent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,11 +141,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
-                getAdapter().couleur = Color.parseColor("#42A5F5");
-                getAdapter().titreLigne = maMusique.MesMusics.get(index).leTitre;
-                maListe.setAdapter(getAdapter());
-
+                adapter.couleur = Color.parseColor("#42A5F5");
+                adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                adapter.img = maMusique.MesMusics.get(index).uneImg;
+                maListe.setAdapter(adapter);
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+                createNotification(adapter.titreLigne,adapter.img);
             }
         });
 
@@ -145,18 +172,21 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
-                getAdapter().couleur = Color.parseColor("#42A5F5");
-                getAdapter().titreLigne = maMusique.MesMusics.get(index).leTitre;
-                maListe.setAdapter(getAdapter());
+                adapter.couleur = Color.parseColor("#42A5F5");
+                adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                adapter.img = maMusique.MesMusics.get(index).uneImg;
+                maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+                createNotification(adapter.titreLigne,adapter.img);
             }
         });
 
     }
 
-    private final void createNotification(){
-        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    private final void createNotification(String text, int img){
+        notif = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         final Intent launchNotifiactionIntent = new Intent(this, MainActivity.class);
         final PendingIntent pendingIntent = PendingIntent.getActivity(this,REQUEST_CODE, launchNotifiactionIntent,
@@ -166,11 +196,27 @@ public class MainActivity extends AppCompatActivity {
                 .setWhen(System.currentTimeMillis())
                 .setTicker("BEBEB")
                 .setSmallIcon(R.mipmap.kqt)
-                .setContentTitle(getResources().getString(R.string.notification_title))
-                .setContentText(getResources().getString(R.string.notification_desc))
-                .setContentIntent(pendingIntent);
+                .setContentTitle(text)
+                .setContentText(null)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+               // .addAction(R.mipmap.previous, null,
+               //         PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+             //   .addAction(R.mipmap.pause, null,
+              //          PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+              //  .addAction(R.mipmap.next, null,
+              //          PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+                ;
 
-        mNotification.notify(NOTIFICATION_ID, builder.build());
+        Notification notification = new Notification.BigPictureStyle(builder)
+                .bigPicture(BitmapFactory.decodeResource(getResources(),img)).build();
+
+
+        notification.color = this.getResources()
+                .getColor(R.color.background);
+       // notification.flags = Notification.FLAG_ONGOING_EVENT;
+        notification.priority = Notification.PRIORITY_MAX;
+        notif.notify(NOTIFICATION_ID, notification);
     }
 
     private ArrayList<LigneMusic> genererLigneMusic(){
@@ -190,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
         {
             maMusique.monPlayer.stop();
         }
+        notif.cancelAll();
         super.onDestroy();
 
     }
