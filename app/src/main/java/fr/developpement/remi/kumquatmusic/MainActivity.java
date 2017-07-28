@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private View bas;
     private NotificationManager notif;
     private ImageButton youtube;
-
+    private static MusicAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
-        final MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
-        maListe.setAdapter(adapter);
+        setAdapter(new MusicAdapter(MainActivity.this,LignesMusics));
+        maListe.setAdapter(getAdapter());
 
         maListe.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 int index = 0;
                 for(int i = 0; i < maMusique.MesMusics.size(); i++)
                 {
-                    if(maMusique.MesMusics.get(i).leTitre == adapter.titreLigne) {
+                    if(maMusique.MesMusics.get(i).leTitre == getAdapter().titreLigne) {
                         index = i - 1;
                         if(index < 0)
                             index = maMusique.MesMusics.size() - 1;
@@ -145,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
                 adapter.img = maMusique.MesMusics.get(index).uneImg;
                 maListe.setAdapter(adapter);
-
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
                 createNotification(adapter.titreLigne,adapter.img);
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 int index = 0;
                 for(int i = 0; i < maMusique.MesMusics.size(); i++)
                 {
-                    if(maMusique.MesMusics.get(i).leTitre == adapter.titreLigne) {
+                    if(maMusique.MesMusics.get(i).leTitre == getAdapter().titreLigne) {
                         index = i + 1;
                         if(index > maMusique.MesMusics.size() - 1)
                             index = 0;
@@ -240,6 +239,20 @@ public class MainActivity extends AppCompatActivity {
         notif.cancelAll();
         super.onDestroy();
 
+    }
+
+    // pour passer sur le lecteur
+    public void page1 (View view) {
+        startActivity(new Intent(this, Lecteur.class));
+    }
+
+
+    public static MusicAdapter getAdapter() {
+        return MainActivity.adapter;
+    }
+
+    public static void setAdapter(MusicAdapter adapter) {
+        MainActivity.adapter = adapter;
     }
 }
 
