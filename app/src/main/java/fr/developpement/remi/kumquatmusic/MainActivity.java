@@ -6,19 +6,15 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -33,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton pause;
     private View bas;
     private NotificationManager notif;
+    private ImageButton youtube;
 
 
     @Override
@@ -47,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
         this.pause = (ImageButton)findViewById(R.id.btPause) ;
         this.bas = findViewById(R.id.LayoutBas);
         this.bas.setVisibility(View.INVISIBLE);
+
         this.precedent.setTag(R.mipmap.previous);
         this.suivant.setTag(R.mipmap.next);
         this.pause.setTag(R.mipmap.pause);
-
+        this.youtube = (ImageButton)findViewById((R.id.btYoutube));
 
 
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
@@ -67,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 bas.setVisibility(View.VISIBLE);
+                maListe.setPadding(0,0,0,150
+                );
                 pause.setImageResource(R.mipmap.pause);
                 pause.setTag(R.mipmap.pause);
                 if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
@@ -110,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent webOpen = new Intent(android.content.Intent.ACTION_VIEW);
+                webOpen.setData(Uri.parse("https://www.youtube.com/channel/UCMFaOzZvLl-fMfU0FET7tmw"));
+                startActivity(webOpen);
+            }
+        });
 
         precedent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         suivant.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 pause.setImageResource(R.mipmap.pause);
