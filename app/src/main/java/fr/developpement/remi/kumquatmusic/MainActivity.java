@@ -1,5 +1,9 @@
 package fr.developpement.remi.kumquatmusic;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +20,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int NOTIFICATION_ID = 0;
+    private static final int REQUEST_CODE = 0;
     private Music maMusique;
     private ListView maListe;
     private ImageButton precedent;
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         this.pause.setTag(R.mipmap.pause);
 
 
+        createNotification();
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
         final MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
         maListe.setAdapter(adapter);
@@ -150,7 +157,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    
+
+    private final void createNotification(){
+        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        final Intent launchNotifiactionIntent = new Intent(this, MainActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this,REQUEST_CODE, launchNotifiactionIntent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Notification.Builder builder = new Notification.Builder(this)
+                .setWhen(System.currentTimeMillis())
+                .setTicker("BEBEB")
+                .setSmallIcon(R.mipmap.kqt)
+                .setContentTitle(getResources().getString(R.string.notification_title))
+                .setContentText(getResources().getString(R.string.notification_desc))
+                .setContentIntent(pendingIntent);
+
+        mNotification.notify(NOTIFICATION_ID, builder.build());
+    }
+
     private ArrayList<LigneMusic> genererLigneMusic(){
         ArrayList<LigneMusic> MesLignesMusics = new ArrayList<LigneMusic>();
         for (int i = 0; i < maMusique.MesMusics.size(); i++){
