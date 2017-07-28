@@ -69,11 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 LigneMusic UneLigne = (LigneMusic)o;
                 adapter.couleur = Color.parseColor("#42A5F5");
                 adapter.titreLigne = ((LigneMusic) o).getText();
+                adapter.img = ((LigneMusic) o).getImg();
                 maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
-                createNotification(adapter.titreLigne,((LigneMusic) o).getImg());
+                createNotification(adapter.titreLigne,adapter.img);
 
             }
         });
@@ -124,9 +125,12 @@ public class MainActivity extends AppCompatActivity {
                 LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
                 adapter.couleur = Color.parseColor("#42A5F5");
                 adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                adapter.img = maMusique.MesMusics.get(index).uneImg;
                 maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+                createNotification(adapter.titreLigne,adapter.img);
             }
         });
 
@@ -153,11 +157,12 @@ public class MainActivity extends AppCompatActivity {
                 LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
                 adapter.couleur = Color.parseColor("#42A5F5");
                 adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                adapter.img = maMusique.MesMusics.get(index).uneImg;
                 maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
-
+                createNotification(adapter.titreLigne,adapter.img);
             }
         });
 
