@@ -13,7 +13,7 @@
 
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btPrecedent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
@@ -22,7 +22,7 @@
             app:srcCompat="@mipmap/previous"/>
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
@@ -31,7 +31,7 @@
             app:srcCompat="@mipmap/pause" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/btStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
@@ -40,7 +40,7 @@
             app:srcCompat="@mipmap/stop" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/btSuivant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
