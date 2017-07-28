@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name" align="center">KumQuat Music</string>
     <string name="notification">KumQuat Music</string>
-    <string name="notification_title">blblablacar</string>
-    <string name="notification_desc">bouillabaise</string>
 </resources>

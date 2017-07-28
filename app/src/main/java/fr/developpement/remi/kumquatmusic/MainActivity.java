@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         this.pause.setTag(R.mipmap.pause);
 
 
-        createNotification();
+
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
         final MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
         maListe.setAdapter(adapter);
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+                createNotification(adapter.titreLigne,((LigneMusic) o).getImg());
 
             }
         });
@@ -153,12 +156,14 @@ public class MainActivity extends AppCompatActivity {
                 maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
+
+
             }
         });
 
     }
 
-    private final void createNotification(){
+    private final void createNotification(String text, int img){
         final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         final Intent launchNotifiactionIntent = new Intent(this, MainActivity.class);
@@ -169,11 +174,25 @@ public class MainActivity extends AppCompatActivity {
                 .setWhen(System.currentTimeMillis())
                 .setTicker("BEBEB")
                 .setSmallIcon(R.mipmap.kqt)
-                .setContentTitle(getResources().getString(R.string.notification_title))
-                .setContentText(getResources().getString(R.string.notification_desc))
-                .setContentIntent(pendingIntent);
+                .setContentTitle(text)
+                .setContentText(null)
+                .setContentIntent(pendingIntent)
+                .addAction(R.mipmap.previous, null,
+                        PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+                .addAction(R.mipmap.pause, null,
+                        PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+                .addAction(R.mipmap.next, null,
+                        PendingIntent.getActivity(getApplicationContext(), 0,getIntent(), 0, null))
+                ;
 
-        mNotification.notify(NOTIFICATION_ID, builder.build());
+        Notification notification = new Notification.BigPictureStyle(builder)
+                .bigPicture(BitmapFactory.decodeResource(getResources(),img)).build();
+
+
+
+        notification.flags = Notification.FLAG_ONGOING_EVENT;
+
+        mNotification.notify(NOTIFICATION_ID, notification);
     }
 
     private ArrayList<LigneMusic> genererLigneMusic(){
