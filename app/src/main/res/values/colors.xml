@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ff4081</color>
     <color name="background">#111</color>
-    <color name="bebe">#584</color>
+    <color name="couleurBackgroundBarreBas">#212121</color>
 </resources>

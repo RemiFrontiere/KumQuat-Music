@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom"
-    android:alpha="0.3">
+    android:gravity="bottom">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:orientation="horizontal"
-        android:background="@color/bebe">
+        android:background="@color/couleurBackgroundBarreBas">
 
 
         <ImageButton
@@ -19,13 +18,33 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
             android:elevation="0dp"
-            app:srcCompat="@mipmap/previous" />
+            android:background="@null"
+            app:srcCompat="@mipmap/previous"/>
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.02"
+            android:background="@null"
+            android:elevation="0dp"
+            app:srcCompat="@mipmap/pause" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.02"
+            android:background="@null"
+            android:elevation="0dp"
+            app:srcCompat="@mipmap/stop" />
 
         <ImageButton
             android:id="@+id/imageButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
+            android:background="@null"
             app:srcCompat="@mipmap/next" />
 
     </LinearLayout>
