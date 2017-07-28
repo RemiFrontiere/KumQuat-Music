@@ -45,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.02"
             android:background="@null"
-            app:srcCompat = "@mipmap/LecteurButton"/>
+            app:srcCompat = "@mipmap/LecteurButton"
+            android:onClick="pageLecteur"/>
 
     </LinearLayout>
 </LinearLayout>
