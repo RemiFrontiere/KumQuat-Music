@@ -57,6 +57,7 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
 
     public int couleur = Color.WHITE;
     public String titreLigne;
+    public int img;
 
     //tweets est la liste des models à afficher
     public MusicAdapter(Context context, ArrayList<LigneMusic> lignesmusics) {
