@@ -196,5 +196,10 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
     }
+
+    // pour passer sur le lecteur
+    public void pageLecteur (View view) {
+        startActivity(new Intent(this, Lecteur.class));
+    }
 }
 
