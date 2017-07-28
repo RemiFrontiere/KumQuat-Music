@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         suivant.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 pause.setImageResource(R.mipmap.pause);
@@ -194,7 +197,8 @@ public class MainActivity extends AppCompatActivity {
                 .bigPicture(BitmapFactory.decodeResource(getResources(),img)).build();
 
 
-
+        notification.color = this.getResources()
+                .getColor(R.color.background);
         notification.flags = Notification.FLAG_ONGOING_EVENT;
 
         mNotification.notify(NOTIFICATION_ID, notification);
