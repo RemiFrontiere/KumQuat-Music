@@ -46,7 +46,7 @@
             android:layout_weight="0.02"
             android:background="@null"
             app:srcCompat = "@mipmap/ic_lecteur"
-            android:onClick="pageLecteur"/>
+            android:onClick="page1"/>
 
     </LinearLayout>
 </LinearLayout>

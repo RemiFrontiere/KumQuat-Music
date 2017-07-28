@@ -5,16 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton suivant;
     private ImageButton pause;
     private View bas;
-
+    private static MusicAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         createNotification();
         ArrayList<LigneMusic> LignesMusics = genererLigneMusic();
-        final MusicAdapter adapter = new MusicAdapter(MainActivity.this,LignesMusics);
-        maListe.setAdapter(adapter);
+        setAdapter(new MusicAdapter(MainActivity.this,LignesMusics));
+        maListe.setAdapter(getAdapter());
 
         maListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 // #2196F3
                 Object o = maListe.getItemAtPosition(position);
                 LigneMusic UneLigne = (LigneMusic)o;
-                adapter.couleur = Color.parseColor("#42A5F5");
-                adapter.titreLigne = ((LigneMusic) o).getText();
-                maListe.setAdapter(adapter);
+                getAdapter().couleur = Color.parseColor("#42A5F5");
+                getAdapter().titreLigne = ((LigneMusic) o).getText();
+                getAdapter().img = ((LigneMusic) o).getImg();
+                maListe.setAdapter(getAdapter());
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 int index = 0;
                 for(int i = 0; i < maMusique.MesMusics.size(); i++)
                 {
-                    if(maMusique.MesMusics.get(i).leTitre == adapter.titreLigne) {
+                    if(maMusique.MesMusics.get(i).leTitre == getAdapter().titreLigne) {
                         index = i - 1;
                         if(index < 0)
                             index = maMusique.MesMusics.size() - 1;
@@ -119,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
-                adapter.couleur = Color.parseColor("#42A5F5");
-                adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
-                maListe.setAdapter(adapter);
+                getAdapter().couleur = Color.parseColor("#42A5F5");
+                getAdapter().titreLigne = maMusique.MesMusics.get(index).leTitre;
+                maListe.setAdapter(getAdapter());
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
             }
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 int index = 0;
                 for(int i = 0; i < maMusique.MesMusics.size(); i++)
                 {
-                    if(maMusique.MesMusics.get(i).leTitre == adapter.titreLigne) {
+                    if(maMusique.MesMusics.get(i).leTitre == getAdapter().titreLigne) {
                         index = i + 1;
                         if(index > maMusique.MesMusics.size() - 1)
                             index = 0;
@@ -148,9 +145,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
-                adapter.couleur = Color.parseColor("#42A5F5");
-                adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
-                maListe.setAdapter(adapter);
+                getAdapter().couleur = Color.parseColor("#42A5F5");
+                getAdapter().titreLigne = maMusique.MesMusics.get(index).leTitre;
+                maListe.setAdapter(getAdapter());
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
             }
@@ -198,8 +195,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // pour passer sur le lecteur
-    public void pageLecteur (View view) {
+    public void page1 (View view) {
         startActivity(new Intent(this, Lecteur.class));
+    }
+
+
+    public static MusicAdapter getAdapter() {
+        return MainActivity.adapter;
+    }
+
+    public static void setAdapter(MusicAdapter adapter) {
+        MainActivity.adapter = adapter;
     }
 }
 
