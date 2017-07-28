@@ -35,4 +35,5 @@
         android:textSize="14sp"
         tools:text="Texte de mon tweet" />
 
+
 </RelativeLayout>

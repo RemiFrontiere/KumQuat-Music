@@ -36,16 +36,17 @@ public class Music {
 
         Collections.sort(TitresMusics);
 
-        this.MesMusics.add(new UneMusique(TitresMusics.get(0), "2.58",R.mipmap.coldpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(0), "2.59",R.mipmap.coldpicture));
         this.MesMusics.add(new UneMusique(TitresMusics.get(1), "3.08",R.mipmap.energipicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.35",R.mipmap.kindapicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.20",R.mipmap.lastpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.18",R.mipmap.justpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.35",R.mipmap.kindapicture));
         this.MesMusics.add(new UneMusique(TitresMusics.get(4), "3.13",R.mipmap.littlepicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "3.17",R.mipmap.toolatepicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "3.18",R.mipmap.justpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "2.32",R.mipmap.sjflpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.05",R.mipmap.wishespicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.45",R.mipmap.windpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "2.32",R.mipmap.sjflpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "3.20",R.mipmap.lastpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "3.17",R.mipmap.toolatepicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.45",R.mipmap.windpicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.05",R.mipmap.wishespicture));
+
 
     }
 
