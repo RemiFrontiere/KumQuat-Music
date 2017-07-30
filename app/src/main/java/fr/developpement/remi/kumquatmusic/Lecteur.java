@@ -26,7 +26,7 @@ public class Lecteur extends AppCompatActivity {
     private ImageButton lecteur;
     private ImageButton precedent;
     private ImageButton suivant;
-    private ImageButton pause;
+    public static ImageButton pause;
     private ImageButton youtube;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class Lecteur extends AppCompatActivity {
             this.suivant = (ImageButton) findViewById(R.id.btSuivant);
             this.pause = (ImageButton) findViewById(R.id.btPause);
             this.youtube = (ImageButton) findViewById(R.id.btYoutube);
+            MainActivity.monLecteur = this;
 
             if ((Integer) MainActivity.pause.getTag() == R.mipmap.pause) {
                 this.pause.setTag(R.mipmap.pause);
@@ -114,6 +115,7 @@ public class Lecteur extends AppCompatActivity {
                     Lecteur.this.finish();
                     MainActivity.precedent.performClick();
                     Lecteur.this.startActivity(getIntent());
+                    MainActivity.monLecteur = Lecteur.this;
                 }
             });
 
@@ -123,6 +125,7 @@ public class Lecteur extends AppCompatActivity {
                     Lecteur.this.finish();
                     MainActivity.suivant.performClick();
                     Lecteur.this.startActivity(getIntent());
+                    MainActivity.monLecteur = Lecteur.this;
                 }
             });
         }

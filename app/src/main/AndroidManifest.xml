@@ -22,6 +22,21 @@
                 <action android:name="android.intent.action.Lecteur"/>
                 <category android:name="android.intent.category.LAYNCHER"/>
             </intent-filter>
+        <receiver android:name="Bt_pause_listener">
+            <intent-filter>
+                <action android:name="pause_clicked"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="Bt_next_listener">
+            <intent-filter>
+                <action android:name="next_clicked"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="Bt_previous_listener">
+            <intent-filter>
+                <action android:name="previous_clicked"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
