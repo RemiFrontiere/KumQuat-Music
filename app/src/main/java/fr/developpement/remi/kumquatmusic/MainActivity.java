@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
                     maMusique.Lire(MainActivity.this, UneLigne.getText());
 
                     createNotification(adapter.titreLigne, adapter.img);
-
-                    startActivity(new Intent(MainActivity.this, Lecteur.class));
                 }
                 else
                     startActivity(new Intent(MainActivity.this, Lecteur.class));
