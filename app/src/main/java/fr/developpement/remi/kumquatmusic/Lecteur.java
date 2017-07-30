@@ -62,6 +62,7 @@ public class Lecteur extends AppCompatActivity {
             lecteur.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    MainActivity.positionMainActivity = true;
                     Lecteur.this.finish();
                 }
 

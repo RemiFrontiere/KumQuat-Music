@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static RemoteViews remoteViews;
     public static Context monLecteur;
     public static Context ici;
+    public static boolean positionMainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             this.pause.setTag(R.mipmap.pause);
             this.youtube = (ImageButton) findViewById((R.id.btYoutube));
             ici = this;
-
+            positionMainActivity = true;
 
 
 
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(MainActivity.this, Lecteur.class));
+                    positionMainActivity = false;
                 }
 
             });
@@ -257,7 +259,8 @@ public class MainActivity extends AppCompatActivity {
                     .setAutoCancel(true)
                     .setCustomBigContentView(remoteViews)
                     .setContentIntent(pendingIntent)
-                    .setColor(ContextCompat.getColor(this,R.color.colorAccent));
+                    .setColor(ContextCompat.getColor(this,R.color.colorPrimary))
+                    .setOngoing(true);
 
 
             notifManager.notify(notifId, builderNotif.build());
@@ -291,6 +294,8 @@ public class MainActivity extends AppCompatActivity {
                 maMusique.monPlayer.stop();
             }
             super.onDestroy();
+            builderNotif.setOngoing(false);
+            notifManager.cancelAll();
         }
         catch (Exception e)
         {
