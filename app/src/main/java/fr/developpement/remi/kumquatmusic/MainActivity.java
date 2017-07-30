@@ -241,11 +241,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // pour passer sur le lecteur
-    public void page1 (View view) {
-        startActivity(new Intent(this, Lecteur.class));
-    }
-
 
     public static MusicAdapter getAdapter() {
         return MainActivity.adapter;
