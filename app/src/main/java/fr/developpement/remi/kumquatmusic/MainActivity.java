@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
                 createNotification(adapter.titreLigne,adapter.img);
 
+                startActivity(new Intent(MainActivity.this, Lecteur.class));
             }
         });
 
@@ -240,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
     }
+
 
 
     public static MusicAdapter getAdapter() {

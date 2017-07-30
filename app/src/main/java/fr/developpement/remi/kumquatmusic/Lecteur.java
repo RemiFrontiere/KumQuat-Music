@@ -1,5 +1,6 @@
 package fr.developpement.remi.kumquatmusic;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,6 @@ public class Lecteur extends AppCompatActivity {
 
         // image musique
         ImageView imageMusique = (ImageView) findViewById(R.id.imageMusiqueLecteur);
-        imageMusique.setImageResource(MainActivity.getAdapter().img);
+        imageMusique.setImageBitmap(BitmapFactory.decodeResource(getResources(),MainActivity.getAdapter().img));
     }
 }
