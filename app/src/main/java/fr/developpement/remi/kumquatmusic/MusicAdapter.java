@@ -29,13 +29,14 @@ class LigneMusic {
     private int img;
     private String text;
     private String duree;
-    public int couleur;
+    private String youtube;
 
 
-    public LigneMusic(int color, String text, String duree) {
+    public LigneMusic(int color, String text, String duree, String youtube) {
         this.img = color;
         this.text = text;
         this.duree = duree;
+        this.youtube = youtube;
     }
 
     public String getText()
@@ -50,6 +51,10 @@ class LigneMusic {
     {
         return this.duree;
     }
+    public String getYoutube()
+    {
+        return this.youtube;
+    }
 
 }
 
@@ -58,6 +63,7 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
     public int couleur = Color.WHITE;
     public String titreLigne;
     public int img;
+    public String youtube;
 
     //tweets est la liste des models à afficher
     public MusicAdapter(Context context, ArrayList<LigneMusic> lignesmusics) {
@@ -115,6 +121,5 @@ public class MusicAdapter extends ArrayAdapter<LigneMusic> {
         public TextView titre;
         public ImageView avatar;
         public TextView duree;
-        public int maCouleur;
     }
 }

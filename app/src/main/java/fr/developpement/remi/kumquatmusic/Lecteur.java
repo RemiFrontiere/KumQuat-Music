@@ -3,6 +3,8 @@ package fr.developpement.remi.kumquatmusic;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,7 @@ public class Lecteur extends AppCompatActivity {
     private ImageButton precedent;
     private ImageButton suivant;
     private ImageButton pause;
+    private ImageButton youtube;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,6 +37,7 @@ public class Lecteur extends AppCompatActivity {
         this.precedent = (ImageButton) findViewById(R.id.btPrecedent);
         this.suivant = (ImageButton) findViewById(R.id.btSuivant);
         this.pause = (ImageButton) findViewById(R.id.btPause);
+        this.youtube = (ImageButton) findViewById(R.id.btYoutube);
 
         if ((Integer) MainActivity.pause.getTag() == R.mipmap.pause){
             this.pause.setTag(R.mipmap.pause);
@@ -55,6 +59,24 @@ public class Lecteur extends AppCompatActivity {
                 Lecteur.this.finish();
             }
 
+        });
+
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    Intent webOpen = new Intent(android.content.Intent.ACTION_VIEW);
+                    String adresseYT = MainActivity.getAdapter().youtube;
+                    webOpen.setData(Uri.parse(adresseYT));
+                    startActivity(webOpen);
+                    pause.performClick();
+                }
+                catch (Exception e) {
+
+                }
+
+            }
         });
 
         pause.setOnClickListener(new View.OnClickListener() {

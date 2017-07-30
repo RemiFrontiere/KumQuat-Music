@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                     adapter.couleur = Color.parseColor("#42A5F5");
                     adapter.titreLigne = ((LigneMusic) o).getText();
+                    adapter.youtube = ((LigneMusic) o).getYoutube();
                     adapter.img = ((LigneMusic) o).getImg();
                     maListe.setAdapter(adapter);
 
@@ -150,9 +151,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
+                LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree, maMusique.MesMusics.get(index).adresseYoutube);
                 adapter.couleur = Color.parseColor("#42A5F5");
                 adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
+                adapter.youtube = maMusique.MesMusics.get(index).adresseYoutube;
                 adapter.img = maMusique.MesMusics.get(index).uneImg;
                 maListe.setAdapter(adapter);
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
@@ -182,10 +184,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree);
+                LigneMusic UneLigne = new LigneMusic(maMusique.MesMusics.get(index).uneImg, maMusique.MesMusics.get(index).leTitre, maMusique.MesMusics.get(index).laDuree,maMusique.MesMusics.get(index).adresseYoutube);
                 adapter.couleur = Color.parseColor("#42A5F5");
                 adapter.titreLigne = maMusique.MesMusics.get(index).leTitre;
                 adapter.img = maMusique.MesMusics.get(index).uneImg;
+                adapter.youtube = maMusique.MesMusics.get(index).adresseYoutube;
                 maListe.setAdapter(adapter);
 
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
@@ -234,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<LigneMusic> genererLigneMusic(){
         ArrayList<LigneMusic> MesLignesMusics = new ArrayList<LigneMusic>();
         for (int i = 0; i < maMusique.MesMusics.size(); i++){
-            MesLignesMusics.add(new LigneMusic(maMusique.MesMusics.get(i).uneImg,maMusique.MesMusics.get(i).leTitre,maMusique.MesMusics.get(i).laDuree));
+            MesLignesMusics.add(new LigneMusic(maMusique.MesMusics.get(i).uneImg,maMusique.MesMusics.get(i).leTitre,maMusique.MesMusics.get(i).laDuree,maMusique.MesMusics.get(i).adresseYoutube));
         }
 
         return MesLignesMusics;

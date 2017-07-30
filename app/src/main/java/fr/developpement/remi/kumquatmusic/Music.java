@@ -37,17 +37,17 @@ public class Music {
 
         Collections.sort(TitresMusics);
 
-        this.MesMusics.add(new UneMusique(TitresMusics.get(0), "2.59",R.mipmap.coldpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(1), "2.34",R.mipmap.dreamstar));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.08",R.mipmap.energipicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.18",R.mipmap.justpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(4), "3.35",R.mipmap.kindapicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "3.13",R.mipmap.littlepicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "2.32",R.mipmap.sjflpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "3.20",R.mipmap.lastpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.17",R.mipmap.toolatepicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.45",R.mipmap.windpicture));
-        this.MesMusics.add(new UneMusique(TitresMusics.get(10), "3.05",R.mipmap.wishespicture));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(0), "2.59",R.mipmap.coldpicture,"https://www.youtube.com/watch?v=ZSOQ6dZDQ7U" ));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(1), "2.34",R.mipmap.dreamstar,"https://www.youtube.com/watch?v=VYGiQMHetFo&t=6s"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(2), "3.08",R.mipmap.energipicture,"https://www.youtube.com/watch?v=4nYidtMvPoM"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(3), "3.18",R.mipmap.justpicture, "https://www.youtube.com/watch?v=r_tfLuKSI8U"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(4), "3.35",R.mipmap.kindapicture,"https://www.youtube.com/watch?v=e5omNXCwzOQ"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(5), "3.13",R.mipmap.littlepicture,"https://www.youtube.com/watch?v=02CP9uHZgNA"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(6), "2.32",R.mipmap.sjflpicture,"https://www.youtube.com/watch?v=6p8BRPwpKfw"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(7), "3.20",R.mipmap.lastpicture,"https://www.youtube.com/watch?v=EmLZgSPDM3c"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(8), "3.17",R.mipmap.toolatepicture,"https://www.youtube.com/watch?v=_8QDDCH0-To"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(9), "3.45",R.mipmap.windpicture,"https://www.youtube.com/watch?v=YD5RDC04amQ"));
+        this.MesMusics.add(new UneMusique(TitresMusics.get(10), "3.05",R.mipmap.wishespicture,"https://www.youtube.com/watch?v=UzU6f1xLq0U"));
 
 
     }
@@ -94,9 +94,6 @@ public class Music {
         monPlayer.start();
     }
 
-    public void Stop(){
-        monPlayer.stop();
-    }
 }
 
 class UneMusique{
@@ -104,11 +101,13 @@ class UneMusique{
     public String leTitre;
     public  String laDuree;
     public int uneImg;
+    public String adresseYoutube;
 
-    public UneMusique(String titre, String duree, int img){
+    public UneMusique(String titre, String duree, int img, String youtube){
         this.laDuree = duree;
         this.leTitre = titre;
         this.uneImg = img;
+        this.adresseYoutube = youtube;
     }
 
 
