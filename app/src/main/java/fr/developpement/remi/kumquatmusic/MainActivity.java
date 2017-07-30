@@ -22,14 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int NOTIFICATION_ID = 0;
     private static final int REQUEST_CODE = 0;
-    private Music maMusique;
+    public static Music maMusique;
     private ListView maListe;
-    private ImageButton precedent;
-    private ImageButton suivant;
-    private ImageButton pause;
+    public static ImageButton precedent;
+    public static ImageButton suivant;
+    public static ImageButton pause;
     private View bas;
     private NotificationManager notif;
     private ImageButton youtube;
+    private ImageButton lecteur;
     private static MusicAdapter adapter;
 
     @Override
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         this.pause = (ImageButton)findViewById(R.id.btPause) ;
         this.bas = findViewById(R.id.LayoutBas);
         this.bas.setVisibility(View.INVISIBLE);
+        this.lecteur = (ImageButton)findViewById(R.id.btLecteur);
 
         this.precedent.setTag(R.mipmap.previous);
         this.suivant.setTag(R.mipmap.next);
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                 createNotification(adapter.titreLigne,adapter.img);
 
+                startActivity(new Intent(MainActivity.this, Lecteur.class));
             }
         });
 
@@ -107,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
                             pause.setTag(R.mipmap.pause);
                     }
                 }
+
+        });
+
+        lecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Lecteur.class));
+            }
 
         });
 
@@ -148,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
                 createNotification(adapter.titreLigne,adapter.img);
+                startActivity(new Intent(MainActivity.this, Lecteur.class));
             }
         });
 
@@ -180,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
                 createNotification(adapter.titreLigne,adapter.img);
+                startActivity(new Intent(MainActivity.this, Lecteur.class));
             }
         });
 
@@ -240,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
     }
+
 
 
     public static MusicAdapter getAdapter() {
