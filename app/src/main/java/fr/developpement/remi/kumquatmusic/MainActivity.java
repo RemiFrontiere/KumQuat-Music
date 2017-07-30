@@ -57,38 +57,39 @@ public class MainActivity extends AppCompatActivity {
         setAdapter(new MusicAdapter(MainActivity.this,LignesMusics));
         maListe.setAdapter(getAdapter());
 
-        maListe.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
         maListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                bas.setVisibility(View.VISIBLE);
-                maListe.setPadding(0,0,0,150
-                );
-                pause.setImageResource(R.mipmap.pause);
-                pause.setTag(R.mipmap.pause);
-                if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying())
-                {
-                    maMusique.monPlayer.stop();
+
+                if(bas.getVisibility() == View.INVISIBLE){
+                    bas.setVisibility(View.VISIBLE);
+                    maListe.setPadding(0,0,0,150);
                 }
 
-                // #2196F3
                 Object o = maListe.getItemAtPosition(position);
                 LigneMusic UneLigne = (LigneMusic)o;
-                adapter.couleur = Color.parseColor("#42A5F5");
-                adapter.titreLigne = ((LigneMusic) o).getText();
-                adapter.img = ((LigneMusic) o).getImg();
-                maListe.setAdapter(adapter);
 
-                maMusique.Lire(MainActivity.this,UneLigne.getText());
+                if (adapter.titreLigne != ((LigneMusic) o).getText()) {
+                    pause.setImageResource(R.mipmap.pause);
+                    pause.setTag(R.mipmap.pause);
+                    if (maMusique.monPlayer != null && maMusique.monPlayer.isPlaying()) {
+                        maMusique.monPlayer.stop();
+                    }
 
-                createNotification(adapter.titreLigne,adapter.img);
 
-                startActivity(new Intent(MainActivity.this, Lecteur.class));
+                    adapter.couleur = Color.parseColor("#42A5F5");
+                    adapter.titreLigne = ((LigneMusic) o).getText();
+                    adapter.img = ((LigneMusic) o).getImg();
+                    maListe.setAdapter(adapter);
+
+                    maMusique.Lire(MainActivity.this, UneLigne.getText());
+
+                    createNotification(adapter.titreLigne, adapter.img);
+
+                    startActivity(new Intent(MainActivity.this, Lecteur.class));
+                }
+                else
+                    startActivity(new Intent(MainActivity.this, Lecteur.class));
             }
         });
 
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
                 createNotification(adapter.titreLigne,adapter.img);
-                startActivity(new Intent(MainActivity.this, Lecteur.class));
+
             }
         });
 
@@ -192,11 +193,11 @@ public class MainActivity extends AppCompatActivity {
                 maMusique.Lire(MainActivity.this,UneLigne.getText());
 
                 createNotification(adapter.titreLigne,adapter.img);
-                startActivity(new Intent(MainActivity.this, Lecteur.class));
             }
         });
 
     }
+
 
     private final void createNotification(String text, int img){
         notif = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

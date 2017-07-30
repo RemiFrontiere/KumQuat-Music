@@ -76,6 +76,7 @@ public class Lecteur extends AppCompatActivity {
                     MainActivity.pause.setTag(R.mipmap.pause);
                     pause.setImageResource(R.mipmap.pause);
                     pause.setTag(R.mipmap.pause);
+
                 }
             }
 
@@ -86,6 +87,7 @@ public class Lecteur extends AppCompatActivity {
             public void onClick(View v) {
                 Lecteur.this.finish();
                 MainActivity.precedent.performClick();
+                Lecteur.this.startActivity(getIntent());
             }
         });
 
@@ -94,6 +96,7 @@ public class Lecteur extends AppCompatActivity {
             public void onClick(View v) {
                 Lecteur.this.finish();
                 MainActivity.suivant.performClick();
+                Lecteur.this.startActivity(getIntent());
             }
         });
     }
