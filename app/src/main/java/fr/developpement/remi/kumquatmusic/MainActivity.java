@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -213,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
                     createNotification(adapter.titreLigne, adapter.img);
                 }
             });
+
+
         }
         catch (Exception e) {
             new AlertDialog.Builder(this)
@@ -284,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
 
         return MesLignesMusics;
     }
-
 
 
     public void onDestroy() {

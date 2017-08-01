@@ -92,7 +92,17 @@ public class Music {
         }
         monPlayer = MediaPlayer.create(context,MP3);
         monPlayer.start();
+
+        if(monPlayer.isPlaying()) {
+            monPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    MainActivity.suivant.performClick();
+                }
+            });
+        }
     }
+
 
 }
 
